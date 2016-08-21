@@ -47,8 +47,8 @@ def mapInteractive(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		location = gpsCoords(0,0, ul, lr,19,19)
 		ip = InterestPoint.objects.filter(location=location)
-		form = InterestPointForm(instance=ip[0])
-		return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
+		# form = InterestPointForm(instance=ip[0])
+		return render(request, 'world/map.html', {'rows':range(19), 'columns':range(19), 'img_url':img_url})
 
 
 def mapForm(request):
@@ -111,11 +111,11 @@ def uploadFile(request):
 		lr = GEOSGeometry('POINT (%f %f)' %(17.384596, 78.403249))                 
 		location = gpsCoords(0,0, ul, lr,19,19)
 		ip = InterestPoint.objects.filter(location=location)
-		form = InterestPointForm(instance=ip[0])
+		# form = InterestPointForm(instance=ip[0])
 		form = UploadFileForm(request.POST, request.FILES)
 		if form.is_valid():
 			imageObject = form.save()
-			return render(request, 'world/mappage.html', {'rows':range(19), 'columns':range(19),'form':form, 'img_url':img_url})
+			return render(request, 'world/mappage.html', {'rows':range(19), 'columns':range(19), 'img_url':img_url})
 		
 		else:
 			html = "<html><body>"+str(form.errors)+"</body></html>"
